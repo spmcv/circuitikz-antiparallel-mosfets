@@ -1,0 +1,50 @@
+\documentclass[border=25]{standalone}
+\usepackage{ifthen}
+\usepackage[siunitx]{circuitikz}
+
+\ctikzsubcircuitdef{antiparallel}{center, in, out, gate, vs+, vs-}{
+    coordinate (#1-center)
+    (#1-center) + (-1.5,0) node[circ] (#1-g) {}
+    (#1-g) to[short] + (-1,0) coordinate (#1-gate)
+    foreach[count=\i] \a/\b in {vsp/vs+, vsn/vs-} {
+        (#1-center) + (0,\fpeval{(-1)^\i*1.5}) coordinate (#1-\a)
+        (#1-\a) to[short] + (1,0) coordinate (#1-\b)
+    }
+    (#1-vsp) to[
+        R,
+        l=$R_{cs}$,
+        i=$i_{cs}$,
+        v=$v_{cs}$,
+        voltage shift=1,
+        name=#1-rcs,
+        *-*
+    ] (#1-vsn)
+    foreach[count=\i] \a/\b in {in/vsp, out/vsn} {
+        (0, \fpeval{(-1)^\i*3}) node[
+            nigfete,
+            bodydiode,
+            yscale=\fpeval{(-1)^\i}
+        ] (#1-Q\i) {
+            \ifthenelse{
+                \fpeval{(-1)^\i}<0
+            }{
+                \ctikzflipy{Q\i}
+            }{
+                Q\i
+            }
+        }
+        (#1-Q\i.drain) coordinate (#1-\a)
+        (#1-Q\i.source) to[short] (#1-\b)
+        (#1-Q\i.gate) to[short] (#1-g|-#1-Q\i.gate) to[short] (#1-g)
+    }
+}
+
+\ctikzsubcircuitactivate{antiparallel}
+
+\begin{document}
+
+\begin{circuitikz}[american]
+    \draw(0,0) \antiparallel{ap1}{center};
+\end{circuitikz}
+
+\end{document}
