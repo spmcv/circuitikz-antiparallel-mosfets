@@ -1,7 +1,7 @@
-example:
+tex:
 	latexmk example
 
-vector:
+svg:
 	dvisvgm example
 
 clean:
