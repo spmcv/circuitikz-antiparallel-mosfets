@@ -49,7 +49,7 @@ export LIBGS=/opt/homebrew/Cellar/ghostscript/[version]/lib/libgs.dylib
 the `dvisvgm` generated the expected output with the Makefile. However,
 as alluded to before with the `-shell-escape` option, the dynamic library
 path would need to be fixed globally for `latexmk` to spawn another shell
-execute the `convert` configuration option.  
+to execute the `convert` configuration option.
 
 ## Usage
 
