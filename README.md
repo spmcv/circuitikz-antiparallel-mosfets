@@ -15,7 +15,8 @@ graphics asset for use in other documentation formats.
 
 After considering various options, the most straightforward approach seemed
 to be to use `latexmk` to generate `DVI->PDF` and `DVI->SVG` using a Makefile.
-For ease of use, I limited the software tools I used to those included in a standard TeXLive distribution.
+For broad compatibility, I limited the software tools I used to those included
+in a standard TeXLive distribution.
 
 ## Challenges
 
@@ -46,7 +47,7 @@ export LIBGS=/opt/homebrew/Cellar/ghostscript/[version]/lib/libgs.dylib
 ```
 
 the `dvisvgm` generated the expected output with the Makefile. However,
-as alluded to before with the `-shell-escape'` option, the dynamic library
+as alluded to before with the `-shell-escape` option, the dynamic library
 path would need to be fixed globally for `latexmk` to spawn another shell
 execute the `convert` configuration option.  
 
