@@ -49,7 +49,7 @@ Scharrer, the author of `standalone`, elaborates on that point in a Stack
 Exchange [answer](https://tex.stackexchange.com/a/51766). However, I had a
 some difficulty getting this method to operate as intended with `latexmk`.
 
-### Shell Escape
+### Issue #1: Shell Escape
 At first, the conversion failed to execute without the latexmk `-shell-escape`
 option. Note that `latexmkrc` file would need entries like:
 
@@ -57,9 +57,10 @@ option. Note that `latexmkrc` file would need entries like:
 $latex = 'latex -shell-escape';
 ```
 
-as a required option each interpreter(`latex`, `xelatex`, etc.)
+as a required option each interpreter(`latex`, `xelatex`, etc.). This would be
+fine if not for the second issue.
 
-### GhostScript
+### Issue #2: GhostScript
 
 After that, the conversion failed due to [dvisvgm](https://dvisvgm.de) being
 unable to locate the GhostScript dynamic library path. This may be a primarily
@@ -69,7 +70,11 @@ macOS and Homebrew [issue](https://tex.stackexchange.com/a/559650). With:
 export LIBGS=/opt/homebrew/Cellar/ghostscript/[version]/lib/libgs.dylib
 ```
 
-the `dvisvgm` generated the expected output with the Makefile. However,
-as alluded to before with the `-shell-escape` option, the dynamic library
-path would need to be fixed globally for `latexmk` to spawn another shell
-to execute the `convert` configuration option.
+the `dvisvgm` generated the expected output with the Makefile.
+
+However, as alluded to before with the `-shell-escape` option, the dynamic
+library path would need to be fixed globally for `latexmk` to spawn another
+shell to successfully execute the `convert` configuration option.
+
+To avoid adding any OS-specific configuration to this codebase, this repository
+will assume a functional GhostScript support until this issue can be resolved.
