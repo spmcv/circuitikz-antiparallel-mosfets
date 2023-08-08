@@ -1,8 +1,8 @@
 tex:
-	latexmk example
+	latexmk example.tex
 
 svg:
-	dvisvgm example
+	dvisvgm example.xdv
 
 clean:
 	latexmk -c 
