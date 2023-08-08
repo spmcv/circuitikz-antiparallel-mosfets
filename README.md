@@ -39,7 +39,8 @@ also possible to use `xelatex` to generate `XDV->PDF` and `dvisvgm` to convert
 
 ## Future Work
 
-- [ ] Avoid specifying GhostScript dynamic library path through environmental
+- [ ] Add GitHub Action for continuous integration
+- [ ] Avoid specifying GhostScript dynamic library path via environmental
 variable
 - [ ] Add option for using `xelatex`
 - [ ] Try `dvisvgm` TikZ package [option](https://tikz.dev/drivers#sec-10.2.4)
