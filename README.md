@@ -23,8 +23,11 @@ https://dvisvgm.de/FAQ/) the GhostScript dynamic library on your system via
 ## Usage
 
 The included Makefile contains all commands to render the graphics assets.
-Use `make tex` to generate the PDF output and `make svg` to generate the SVG
-output. Note that the later command is dependent on the former.
+Use the `tex` target to generate the PDF output and the `svg` target to
+generate the SVG output. Note that the later command is dependent on the
+former. For convenience, the `all` target runs both sequential. Additionally,
+the `clean` removes the TeX artifacts while `distclean` removes both artifacts
+and outputs.
 
 ## Implementation
 
